@@ -1,0 +1,422 @@
+body {
+  position: relative;
+  color: black;
+  padding-bottom: 15vh;
+  width: 98vw;
+  margin: 0;
+  background-color: #ced3df;
+  font-family: 'Hepta Slab', serif;
+  font-family: 'Karla', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.grid-container {
+  margin-top: -5%;
+  display: grid;
+  gap: 5vh;  
+}
+
+
+/***************************** NAVBAR *****************************/
+.navbar {
+  color: rgba(255, 255, 255, 0.699);
+  /* background-color: #cad1e1; */
+  display: flex;
+  width: 100vw;
+  right: 0;
+  top: 0;
+  justify-content: space-between;  
+  align-items: center;  
+  font-size: 25px;
+  padding: 5px; 
+  margin-bottom: 15vh;
+  /* background-color: #c5cad7; */
+}
+
+.left-item {
+  list-style: none;
+  font-size: 35px;
+  margin-left: 5%;
+  display: flex;
+}
+
+.left-item li, .logo {
+  transition: transform 1s ease;
+  margin-right: 7vw;
+}
+
+.left-item li a{
+  order: -1; 
+  text-decoration: none;
+  display: flex; 
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;  
+  align-items: center;
+}
+
+.nav-list li {
+  margin-left: 7%;
+  transition: transform 0.5s ease;
+  font-size: large;
+}
+
+.nav-list li a {
+  text-decoration: none;
+}
+
+.nav-list li:last-child {
+  margin-right: 10vw;
+}
+
+/* HOVER STYLING */
+.nav-list li:not(.search-form, .search-form *):hover, .left-item li:hover {
+  transform: scale(1.2);
+}
+
+/***************************** LOGIN/REGISTER *****************************/
+.login h6 {
+  font-size: 13px;
+}
+
+.login h6 a{
+  text-decoration: none;  
+  color: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%); 
+  cursor: pointer;
+}
+
+.login h1 {
+  font-size: 40px;
+  /* margin-top: 10%; */
+  margin-bottom: 3%;
+  font-weight: 900;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+}
+
+.login input {
+  border: none;
+  display: block;
+  background: none;
+  margin-bottom: 3%;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+}
+
+.login input.underline {
+  border-bottom: 1px solid rgb(59, 52, 52); /* Adjust color as needed */
+  padding-bottom: 5px; /* Adjust padding as needed */
+  width: 400px; /* Adjust width as needed */
+  height: 30px;
+  font-size: 18px;
+
+}
+
+.login input.underline:focus {
+  outline: none;
+}
+
+/* Imported from online */
+.button-36 {
+  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 3rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: -2%;
+}
+
+.button-36:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: .1s;
+}
+
+.error-msg {
+  color: rgb(214, 10, 10);
+  margin-top: -2%;
+  margin-bottom: 2%;
+  font-size: 13px;
+}
+
+
+/***************************** HOME *****************************/
+.input-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-group input {
+  margin-right: 10px;  
+}
+
+.input-container {
+  position: relative;
+  width: 400px;  
+  top: 1vh;
+}
+
+.input-container input.underline {
+  border: none;
+  border-bottom: 1px solid rgb(59, 52, 52);  
+  padding-bottom: 5px;  
+  width: 80%;
+  height: 30px;
+  font-size: 18px;
+}
+
+.button-37 {
+  background:rgb(43, 40, 40);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 3rem;
+  padding: 0 1.6rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 5%;
+}
+/***************************** SEARCHBAR *****************************/
+.search-form {
+  /* width: 140%; */
+  width: 200px;
+  margin-right: 5vw;
+  position: relative;
+  /* background-color: #c3c7d2; */
+  /* background-color: #c3c9d7; */
+  border-radius: 10px;
+}
+
+.search-form-dropdown {
+  position: absolute;
+  width: 100%;
+  max-height: 25vh;
+  overflow-y: scroll;
+  background-color: #b1b6c1;
+  /* background-color: #bdc3d0; */
+  border-radius: 10px;
+  z-index: 1000;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hides Scrollbar for news div */
+.symbols_dropdown::-webkit-scrollbar {
+  display: none;    /* For Chrome, Safari and Opera */
+}
+
+/***************************** COMPANY PAGE *****************************/
+.company-container {
+  margin-left: 20%;
+  width: 60%; /* Set width to 50% of the viewport width */
+  max-width: 60%; /* Ensure the width doesn't exceed 50% */
+  padding: 20px; /* Add padding for spacing */
+}
+
+/***************************** STOCK *****************************/
+.stock-container {
+  text-align: center;
+  /* margin-top: -10%; */
+  font-family: "Palatino";
+  /* font-family: "Times New Roman"; */
+
+}
+
+.stock-title {
+  font-size: 25px;
+  line-height: 75%;
+}
+
+.stock-price {
+  justify-content: center;  
+  align-items: center;
+  display: flex;
+  margin-top: 2%;
+  font-size: 22px;
+  flex-direction: row;
+}
+
+.stock-price b {
+  margin-left: 5px;
+}
+
+.stock-description {
+  font-size: 17px;
+  line-height: 3vh;
+}
+
+.stock-logo {
+  border-radius: 50%;  
+  background-color: #ced3df;
+}
+
+.stock-chart {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.stock-purchase-form {
+  margin-top: 3%;
+  margin-bottom: 5%;
+  justify-content: center;
+  text-align: center;
+}
+
+.stock-purchase-unauthenticated {
+  font-size: 14px;
+  font-weight: 900;
+  font-family: "karla";
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.stock-purchase-unauthenticated a {
+  color: blue;
+}
+
+.stock-purchase-error {
+  color: rgb(214, 10, 10);
+  font-size: 14px;
+  font-weight: 900;
+  font-family: "karla";
+  margin-bottom: 1%;
+}
+/***************************** NEWS *****************************/
+.news-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-big-article, .news-small-article {
+  gap: 10px; 
+  max-width: 80%;
+  margin-bottom: 10px;
+  justify-content: center;
+  display: flex;
+  padding: 0 25%;
+}
+
+.news-big-size {
+  height: 50vh;
+  width: 25vw;
+  /* border-radius: 50px; */
+}
+
+.news-big-content {
+  font-family: Arial, sans-serif;
+  height: 50%;
+  overflow: hidden;
+}
+
+.news-small-size {
+  height: 15vh;
+  width: 16.5vw;
+  /* border-radius: 50px; */
+}
+
+.news-view-more {
+  text-align: center;
+}
+
+.news-view-more a {
+  color: rgb(255, 99, 132);
+  text-decoration: none;    /* remove the underline on link */
+}
+
+.news-view-more-top-stories {
+  font-size: 35px;
+}
+
+.news-grid {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  grid-template-columns: repeat(auto-fill, minmax(calc(33.33% - 20px), 1fr)); /* Adjusted minmax function */
+  grid-gap: 20px;
+  /* margin-top: 10%; */
+}
+
+.positive_arrow {
+  color:#067501;
+  font-size: 17px;
+}
+
+.negative_arrow, .error_msg {
+  color:#ce1e1e;
+  font-size: 17px;
+}
+
+
+/***************************** PROFILE *****************************/
+.profile-container {
+  margin-left: 10%;
+  max-width: 80%; 
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.profile-welcome {
+  font-size: 40px;
+}
+
+.profile-content {
+  margin-top: 3%;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.profile-investments-graph {
+  flex: 7.2;
+  overflow-y: auto;
+}
+
+.profile-investments-list {
+  position: relative;
+  font-family: "Palatino";
+  flex: 2.8;
+  overflow-y: scroll;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid rgb(106, 108, 111);
+  background-color: #b1b6c1;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
