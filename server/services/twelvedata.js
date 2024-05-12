@@ -79,8 +79,15 @@ const twelvedataPrice = async (symbol) => {
             const response = await axios.request(option);
             const data = response.data;
 
-            // Check if data is valid
-            if (data && data.code != 403 && data.code != 404 && data.code != 429) 
+            //invalid data
+            if(data.code == 404)
+            {
+                //return null values
+                return {
+                    "price": null
+                };
+            }
+            if (data && data.code != 403 && data.code != 429) 
             {
                 console.log(`Current Price: used key ${i}`);
                 return data;
@@ -145,8 +152,18 @@ const twelvedataQuote = async (symbol) => {
             const response = await axios.request(option);
             const data = response.data;
 
-            // Check if data is valid
-            if (data && data.code != 403 && data.code != 404 && data.code != 429) 
+            //invalid data
+            if(data.code == 404)
+            {
+                //return null values
+                return {
+                    "name": null,
+                    "exchange": null,
+                    "change": null,
+                    "percent_change": null
+                };
+            }
+            if (data && data.code != 403 && data.code != 429) 
             {
                 console.log(`Quote: used key ${i}`);
                 return data;
@@ -208,8 +225,15 @@ const twelvedataLogo = async (symbol) => {
             const response = await axios.request(option);
             const data = response.data;
 
-            // Check if data is valid
-            if (data && data.code != 403 && data.code != 404 && data.code != 429) 
+            //invalid data
+            if(data.code == 404)
+            {
+                //return null values
+                return {
+                    "url": null
+                };
+            }
+            if (data && data.code != 403 && data.code != 429) 
             {
                 console.log(`Logo: used key ${i}`);
                 return data;
@@ -284,8 +308,16 @@ const twelvedataHistory = async(symbol) => {
             const response = await axios.request(option);
             const data = response.data;
 
+            //invalid data
+            if(data.code == 404)
+            {
+                //return null values
+                return {
+                    "values": null
+                };
+            }
             // Check if data is valid
-            if (data && data.code != 403 && data.code != 404 && data.code != 429) 
+            if (data && data.code != 403 && data.code != 429) 
             {
                 console.log(`History: used key ${i}`);
                 return data;

@@ -21,6 +21,7 @@ const profileService = async (req) => {
 
     //if valid user
     if (user) {
+        username = user.username;
         investments = user.investments;
         stock_list = investments.stock_list;
         stocks = investments.stocks;

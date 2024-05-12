@@ -28,7 +28,7 @@ const getSymbolsService = async (query, limit) => {
 //******************************************************************getPRICE()***************************************************** */
 const getPriceService = async (symbol) => {
     const data = await twelvedataPrice(symbol);
-    const currentPrice = Number(data.price).toFixed(2);
+    const currentPrice = data.price != null ? Number(data.price).toFixed(2) : null;
     return {
         "result": currentPrice
     }
@@ -65,7 +65,7 @@ const getHistoryService = async (symbol) => {
     const values = data.values;
     var history = [];
 
-    if(values != undefined)
+    if(values != null)
     {
         for(var i = 0; i < values.length; i++)
         {

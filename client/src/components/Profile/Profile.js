@@ -9,6 +9,7 @@ import DepositForm from './DepositForm';
 
 function Profile() {
 
+    const [user, setUser] = useState(null);
     const [stocks, setStocks] = useState(null);
     const [cash, setCash] = useState("...");
     const authenticated = useCheckAuth();
@@ -21,7 +22,7 @@ function Profile() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data); 
+            setUser(data.user);
             setStocks(data.stock_symbols);
             setCash(data.cash);
         })
@@ -149,7 +150,7 @@ function Profile() {
         return (
             <div className="profile-container">
                 <div className="profile-welcome">
-                    {/* <h3>Welcome, Daniel</h3> */}
+                    <h3>Welcome, {user ? user : "uh oh"}</h3>
                 </div>
 
                 <div className="profile-content">
