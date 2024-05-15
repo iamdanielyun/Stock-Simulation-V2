@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import useCheckAuth from './useCheckAuth';
 
 function Login() {
 
@@ -55,7 +54,6 @@ function Login() {
                     </div>
                     : null
                     }
-
                     <button class="button-36" type="submit">Login</button>
                     <h6>Don't have an account? <a href="/register"><u>Register</u></a></h6>
                 </form>

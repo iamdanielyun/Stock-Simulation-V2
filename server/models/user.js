@@ -17,13 +17,13 @@ const userSchema = new Schema({
             price_purchased: {type: Number, required: true}
         }]
     },
-    // history: {
-    //     time_created: {type: Date, required: true},
-    //     entries: [{
-    //         time: {type: Date, required: true},
-    //         total_value: {type: Number, required: true}
-    //     }]
-    // }
+    history: {
+        time_created: {type: Date, required: true},
+        entries: [{
+            time: {type: Date, required: true},
+            total_value: {type: Number, required: true}
+        }]
+    }
 });
 
 const User = mongoose.model('user', userSchema);

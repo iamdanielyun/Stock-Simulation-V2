@@ -150,7 +150,7 @@ function Profile() {
     if(authenticated)
     {
         //Green if up, red if down
-        const arrow_class = percentChange > 0 ? "positive_arrow" : "negative_arrow";
+        const arrow_class = percentChange >= 0 ? "positive_arrow" : "negative_arrow";
 
         return (
             <div className="profile-container">

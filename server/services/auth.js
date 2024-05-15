@@ -36,7 +36,8 @@ const registerService = async (req, username, password, confirmation) => {
     const new_user = new User({
         username: username,
         password: password, 
-        'investments.cash': 1000       //start with $1000
+        'investments.cash': 1000,           //start with $1000
+        'history.time_created': new Date()  //add time created
     }).save();
 
     //Set session

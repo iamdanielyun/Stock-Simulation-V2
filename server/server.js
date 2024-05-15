@@ -10,6 +10,7 @@ require('dotenv').config();
 const auth = require("./routes/auth");
 const company = require("./routes/company");
 const user = require("./routes/user");
+const { portfolioValueJob } = require("./services/investmentsCron");
 
 //Cors
 const corsOptions = {
@@ -60,3 +61,6 @@ server.get("/", async (req, res) => {
 server.listen(process.env.PORT, () => {
     console.log("Listening...");
 })
+
+//get entire value of every user's portfolio every hour
+portfolioValueJob.start();
