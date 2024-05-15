@@ -50,7 +50,7 @@ const getPortfolioValue = async () => {
 }
 
 //cron job for the above service (runs every hour)
-const portfolioValueJob = cron.schedule("*/1 * * * *", getPortfolioValue, {
+const portfolioValueJob = cron.schedule("0 * * * *", getPortfolioValue, {
     scheduled: false,
     timezone: "America/New_York"
 })

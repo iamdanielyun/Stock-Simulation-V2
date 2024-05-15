@@ -10,7 +10,7 @@ import RedAlert from '../Alert/RedAlert';
 
 function DepositForm(props) {
     const [action, setAction] = useState('Deposit');
-    const [amount, setAmount] = useState(0.01);
+    const [amount, setAmount] = useState(100);
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
     const cash = props.cash;
@@ -19,7 +19,7 @@ function DepositForm(props) {
         e.preventDefault();
 
         //invalid amount
-        if(amount == ""|| amount <= 0)
+        if(amount == ""|| amount == null || amount <= 0)
             setMsg("Please enter a valid amount");
         else
         {
@@ -50,7 +50,6 @@ function DepositForm(props) {
 
     return (
         <ListItem sx={{display: "flex", flexDirection: "column"}}>
-            {/* <Alert variant="filled" severity="error" onClose={() => {}}>This is an error Alert.</Alert> */}
                 <ListItemText 
                     primary={
                         <h3 style={{fontFamily: "Palatino"}}>Buying power: ${cash}</h3>

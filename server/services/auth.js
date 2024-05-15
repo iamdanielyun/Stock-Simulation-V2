@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 //******************************************************************REGISTER***************************************************** */
@@ -33,56 +33,88 @@ const registerService = async (req, username, password, confirmation) => {
     }
 
     //Enter user into database
-    const new_user = new User({
-        username: username,
-        password: password, 
-        'investments.cash': 1000,           //start with $1000
-        'history.time_created': new Date()  //add time created
-    }).save();
+    try {
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    //Set session
-    req.session.userid = username;
-    await req.session.save();
+        //Enter user into database with hashed password
+        const new_user = new User({
+            username: username,
+            password: hashedPassword, 
+            'investments.cash': 1000,           //start with $1000
+            'history.time_created': new Date()  //add time created
+        });
+        await new_user.save();
 
-    //Send ok message
-    return {
-        "status": 201,
-        "message": "User created"
-    };
+        //Set session
+        req.session.userid = username;
+        await req.session.save();
+
+        //Send ok message
+        return {
+            "status": 201,
+            "message": "User created"
+        };
+    } 
+    catch (error) {
+        console.error("Error creating user:", error);
+        return {
+            "status": 500,
+            "message": "Internal Server Error"
+        };
+    }
 }
 
 //******************************************************************LOGIN***************************************************** */
 const loginService = async (req, username, password) => {
 
-    //If missing any fields
-    if(!(username && password)) {
+    // If missing any fields
+    if (!(username && password)) {
         return {
             "status": 401,
             "message": "Missing one of the fields"
         };
     }
 
-    //Get user
-    const user = await User.findOne({
-        username: username,
-        password: password
-    });
+    try {
+        // Get user by username
+        const user = await User.findOne({ username: username });
 
-    if(!user) {
+        // Check if user exists
+        if (!user) {
+            return {
+                "status": 401,
+                "message": "Wrong username and/or password"
+            };
+        }
+
+        // Compare hashed passwords
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        // If passwords don't match
+        if (!passwordMatch) {
+            return {
+                "status": 401,
+                "message": "Wrong username and/or password"
+            };
+        }
+
+        // Set session
+        req.session.userid = username;
+        await req.session.save();
+
         return {
-            "status": 401,
-            "message": "Wrong username and/or password"
+            "status": 201,
+            "message": "Session created"
+        };
+    } 
+    catch (error) {
+        console.error("Error logging in:", error);
+        return {
+            "status": 500,
+            "message": "Internal Server Error"
         };
     }
-
-    //Set session
-    req.session.userid = username;
-    await req.session.save()
-
-    return {
-        "status": 201,
-        "message": "Session created"
-    };
 }
 
 //******************************************************************LOGOUT***************************************************** */
@@ -94,8 +126,8 @@ const logoutService = (req, res) => {
     req.session.destroy(err => {
         if(err) {
             console.error(err);
-            res.status(500).json({
-                "status": 500,
+            res.status(201).json({
+                "status": 201,
                 "message": "failure"
             });
         } else {
