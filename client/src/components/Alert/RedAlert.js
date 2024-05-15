@@ -6,7 +6,7 @@ import Alert from '@mui/material/Alert';
 
 function RedAlert(props) {
     const [open, setOpen] = useState(false);  
-    const { message, marginTop } = props;
+    var { message, marginTop } = props;
 
     useEffect(() => {
         // Whenever a new message is received, open the alert

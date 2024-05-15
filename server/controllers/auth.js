@@ -26,7 +26,7 @@ const authenticated = (req, res, next) => {
 const return_auth = (req, res) => {
     res.send({
         "authenticated": req.session.userid != undefined,
-        "username": req.session ? req.session.userid : "No user"
+        "username": req.session.userid ? req.session.userid : "user"
     })
 }
 

@@ -8,16 +8,17 @@ import { CardActionArea } from '@mui/material';
 
 //Calculate font size depending on length of text
 const calculateFontSize = (textLength) => {
-    const baseVH = 1 + (0.23 * window.innerHeight / 100); // Convert vh to pixels
-    const baseVW = 1 + (0.23 * window.innerWidth / 100); // Convert vw to pixels
+    const baseVH = 1 + (0.20 * window.innerHeight / 100); // Convert vh to pixels
+    const baseVW = 1 + (0.20 * window.innerWidth / 100); // Convert vw to pixels
     const base = baseVH * baseVW;
     
-    const minSize = 1 + (0.20 * window.innerHeight / 100) * (0.20 * window.innerWidth / 100); 
+    const minSize = 1 + (0.15 * window.innerHeight / 100) * (0.15 * window.innerWidth / 100); 
     const maxLength = 60;
-    const scaleFactor = 0.1;
+    const scaleFactor = 0.2;
     
     let fontSize = base - (textLength - maxLength) * scaleFactor;
-    return Math.max(fontSize, minSize);
+    return base;
+    // return Math.max(fontSize, minSize);
 }
 
 function SmallArticle(props) {
@@ -25,9 +26,10 @@ function SmallArticle(props) {
     const backgroundColor = '#c5cad7';
     const borderRadius = "10px";
 
+    
     try {
         //Data
-        const headline = data.headline;
+        var headline = data.headline;
         const url = data.url;
         const source = data.source;
         const date = data.date;
@@ -36,7 +38,7 @@ function SmallArticle(props) {
 
         //Styling
         const headline_style = {
-            fontFamily : 'Palatino',
+            fontFamily : 'Courier New',
             fontSize: `${calculateFontSize(headline.length)}px`,
             fontWeight: 900,
             top: "5px"
@@ -48,6 +50,10 @@ function SmallArticle(props) {
             bottom: '0',
             left: '0.7vw',
         };
+
+        //Trim headline if too long
+        if(headline && headline.length > 70)
+            headline = headline.substring(0,70) + "...";
 
         return (
             <a href={url} target="_blank" rel="noopener noreferrer">

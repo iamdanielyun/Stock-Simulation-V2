@@ -1,7 +1,7 @@
 import '../App.css';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import CircularProgress from '@mui/material/CircularProgress';
 import Home from './Home';
 import Profile from './Profile/Profile';
 import Company from "./Company/Company";
@@ -14,8 +14,15 @@ import useCheckAuth from './Auth/useCheckAuth';
 
   function AnimatedRoutes() {
     const location = useLocation();
-    const authenticated = useCheckAuth();
-    console.log(authenticated);
+    const { authenticated, loading } = useCheckAuth();
+
+    if (loading) {
+      return (
+        <>
+          <center><CircularProgress /></center>
+        </>
+      )
+    }
 
     return (
         <AnimatePresence>
@@ -24,7 +31,7 @@ import useCheckAuth from './Auth/useCheckAuth';
                 <Route path="/profile" element={!authenticated ? <Navigate to="/login" /> : <Profile />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={authenticated ? <Navigate to="/profile" /> : <Login />} />
-                <Route path="/logout" element={<Logout />} />
+                <Route path="/logout" element={!authenticated ? <Navigate to="/login" /> : <Logout />} />
                 <Route path="/company/:symbol" element={<Company />} />
                 <Route path="/company/:symbol/news" element={<AllNews />} />
                 <Route path='*' element={<Navigate to="/" replace />}/>

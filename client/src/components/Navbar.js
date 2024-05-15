@@ -7,7 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Navbar() {
-    const authenticated = useCheckAuth();    
+    const {authenticated} = useCheckAuth();    
     const location = useLocation();
     const home = "<SS />"
     return (

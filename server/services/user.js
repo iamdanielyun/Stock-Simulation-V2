@@ -18,6 +18,8 @@ const profileService = async (req) => {
     var stock_list = null;
     var stocks = null;
     var cash = null;
+    let oldTotal = 0;       //amount user spent
+    let newTotal = 0;       //value of user's investments now
 
     //if valid user
     if (user) {
@@ -25,8 +27,14 @@ const profileService = async (req) => {
         investments = user.investments;
         stock_list = investments.stock_list;
         stocks = investments.stocks;
-        cash = Number(investments.cash).toFixed(2);
-        console.log(stock_list);
+        cash = parseFloat(investments.cash);
+        oldTotal += cash;
+        newTotal += cash;
+
+        //Add up each stock's purchase price
+        for (const stock of stocks) {
+            oldTotal += parseFloat(stock.price_purchased);
+        }   
 
         //for each unique stock, get its current price, percent change and logo
         var stockInfoList = [];
@@ -46,6 +54,8 @@ const profileService = async (req) => {
             const logo_res = await getLogoService(symbol);
             const logo = logo_res.result;
 
+            //Add to new total value of investments
+            newTotal += (parseFloat(current_price) * parseFloat(shares));
             stockInfoList.push({
                 "symbol": symbol,
                 "shares": shares,
@@ -57,13 +67,19 @@ const profileService = async (req) => {
 
         stock_list = stockInfoList;
         console.log(stock_list);
-
     }
+
+    //calculate investments percent increase (or decrease)
+    const change = (newTotal - oldTotal) / oldTotal;
+    const percentChange = change * 100;
     return {
         "user": username,
-        "cash": cash,
+        "cash": cash.toFixed(2),
         "stocks": stocks,
-        "stock_symbols": stock_list
+        "stock_symbols": stock_list,
+        "oldTotal": oldTotal.toFixed(2),
+        "newTotal": newTotal.toFixed(2),
+        "percentChange": percentChange.toFixed(2)
     };
 };
 

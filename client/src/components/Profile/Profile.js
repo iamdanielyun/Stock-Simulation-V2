@@ -6,13 +6,15 @@ import Divider from '@mui/material/Divider';
 import StockItem from './StockItem';
 import useCheckAuth from '../Auth/useCheckAuth';
 import DepositForm from './DepositForm';
+import InvestmentsGraph from './InvestmentsGraph';
 
 function Profile() {
 
-    const [user, setUser] = useState(null);
     const [stocks, setStocks] = useState(null);
     const [cash, setCash] = useState("...");
-    const authenticated = useCheckAuth();
+    const [newTotal, setNewTotal] = useState(0);
+    const [percentChange, setPercentChange] = useState(0);
+    const {authenticated, username} = useCheckAuth();
     
     //Get profile data
     useEffect(() => {
@@ -22,13 +24,13 @@ function Profile() {
         })
         .then(response => response.json())
         .then(data => {
-            setUser(data.user);
             setStocks(data.stock_symbols);
             setCash(data.cash);
+            setNewTotal(data.newTotal);
+            setPercentChange(data.percentChange);
         })
         .catch(err => console.log(err));
     }, [])
-
 
     const stockss = [
         {
@@ -147,15 +149,23 @@ function Profile() {
 
     if(authenticated)
     {
+        //Green if up, red if down
+        const arrow_class = percentChange > 0 ? "positive_arrow" : "negative_arrow";
+
         return (
             <div className="profile-container">
-                <div className="profile-welcome">
-                    <h3>Welcome, {user ? user : "uh oh"}</h3>
-                </div>
-
                 <div className="profile-content">
-                    
 
+                    {/* Graph */}
+                    <div className="profile-investments-graph" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-end" }}>
+                            <span style={{ fontSize: '3rem', fontFamily: 'Palatino' }}><b>${newTotal}</b></span>
+                            <span className={arrow_class} style={{ fontSize: '2.1rem', fontFamily: 'Palatino' }}><b>{percentChange}%</b></span>
+                        </div>
+                        <InvestmentsGraph />
+                    </div>
+
+                    {/* Investments + cash */}
                     <div className="profile-investments-list">
 
                         {/* Deposit/withdraw form */}
@@ -164,7 +174,7 @@ function Profile() {
                         <Divider></Divider>
                         
                         {/* Stock list */}
-                        <List dense sx={{ width: '100%', bgcolor: '#b1b6c1' }}>
+                        <List dense sx={{ width: '100%'}}>
 
                             {/* Data is loading */}
                             { !stocks ? <center><CircularProgress /></center> : null }
@@ -183,9 +193,6 @@ function Profile() {
                             }
                         </List>
                     </div>
-                    <div className="profile-investments-graph">
-                        {/* <h4>Total Investing</h4> */}
-                    </div>
                 </div>
             </div>
         )
@@ -194,7 +201,7 @@ function Profile() {
     {
         return (
             <div className='profile-container'>
-                <center>Please login</center>
+                <center><CircularProgress /></center>
             </div>
         )
     }

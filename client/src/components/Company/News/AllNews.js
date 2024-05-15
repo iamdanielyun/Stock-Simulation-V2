@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 import SmallArticle from "./SmallArticle";
 
 const sample = {
@@ -76,9 +77,7 @@ function AllNews() {
                     <div className="news-container">
                         {/* Map over the array and render SmallArticle for each index */}
                         <div className="news-grid">
-                            <p>
-                                Oops, something went wrong!
-                            </p>
+                            <center><CircularProgress /></center>
                         </div>
                     </div>
                 </div>

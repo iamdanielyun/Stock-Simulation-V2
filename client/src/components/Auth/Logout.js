@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Logout() {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Logout() {
 
     return (
         <div className="home">
-            <h1><b>...</b></h1>
+            <h1><center><CircularProgress /></center></h1>
         </div>
     )
 }

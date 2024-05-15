@@ -29,14 +29,14 @@ function StockItem(props) {
                 </ListItemAvatar>
                 <ListItemText 
                     primary={
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                        <div style={{marginTop: "5%", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                             <div>
                                 <span style={{ fontSize: '1.1rem', fontFamily: 'Palatino' }}>{symbol}</span>
                                 <span style={{ fontSize: '0.7rem', fontFamily: 'Palatino' }}> x{shares}</span>
                             </div>
                             <div style={{display: "flex", flexDirection: "column",}}>
-                                <span style={{ fontSize: '0.9rem', fontFamily: 'Palatino' }}><b>${currentPrice}</b></span>
-                                <span className={arrow_class} style={{ fontSize: '0.8rem', fontFamily: 'Palatino' }}><b> {percentChange}%</b></span>
+                                <span style={{ fontSize: '0.9rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b>${currentPrice}</b></span>
+                                <span className={arrow_class} style={{ fontSize: '0.8rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b> {percentChange}%</b></span>
                             </div>
                         </div>
                     } 

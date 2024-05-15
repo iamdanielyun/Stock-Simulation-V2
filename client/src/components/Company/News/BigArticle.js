@@ -7,8 +7,8 @@ import { CardActionArea } from '@mui/material';
 
 //Calculate font size depending on length of text
 const calculateFontSize = (textLength) => {
-    const baseVH = 1 + (0.28 * window.innerHeight / 100); // Convert vh to pixels
-    const baseVW = 1 + (0.28 * window.innerWidth / 100); // Convert vw to pixels
+    const baseVH = 1 + (0.25 * window.innerHeight / 100); // Convert vh to pixels
+    const baseVW = 1 + (0.25 * window.innerWidth / 100); // Convert vw to pixels
     const base = baseVH * baseVW;
 
     const minSize = 1 + (0.25 * window.innerHeight / 100) * (0.25 * window.innerWidth / 100); 
@@ -16,7 +16,8 @@ const calculateFontSize = (textLength) => {
     const scaleFactor = 0.1;
     
     let fontSize = base - (textLength - maxLength) * scaleFactor;
-    return Math.max(fontSize, minSize);
+    return base;
+    // return Math.max(fontSize, minSize);
 }
 
 function BigArticle(props) {
@@ -26,7 +27,7 @@ function BigArticle(props) {
 
     try {
         //Data
-        const headline = data.headline;
+        var headline = data.headline;
         const url = data.url;
         const source = data.source;
         const date = data.date;
@@ -35,7 +36,7 @@ function BigArticle(props) {
 
         //Styling
         const headline_style = {
-            fontFamily : 'Palatino',
+            fontFamily : 'Courier New',
             fontSize: `${calculateFontSize(headline.length)}px`,
             fontWeight: 900
         };
@@ -48,6 +49,9 @@ function BigArticle(props) {
             padding: '2px',
         };
         
+        if(headline && headline.length > 90)
+            headline = headline.substring(0,90) + "...";
+
         return (
             <a href={url} target="_blank" rel="noopener noreferrer">
                 <Card className="news-big-size" style={{ backgroundColor: backgroundColor, borderRadius: borderRadius}}>

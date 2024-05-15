@@ -12,7 +12,7 @@ function PurchaseForm(props) {
     const [msg, setMsg] = useState("");
     const [action, setAction] = useState("Buy");
     const [shares, setShares] = useState(1);
-    const authenticated = useCheckAuth();
+    const {authenticated} = useCheckAuth();
     const sharesOwned = props.sharesOwned;
 
     //Purchase function
@@ -56,7 +56,7 @@ function PurchaseForm(props) {
             .catch(err => console.log(err));
         }
     }
-
+  
     const menuItemStyle = {
         fontFamily: "Palatino"
     };
@@ -124,15 +124,11 @@ function PurchaseForm(props) {
                 }
 
                 {/* Display error msg */}
-                {msg != "" && msg != "success"
-                ?
-                    // <div className="stock-purchase-error">
-                    //     *{msg}*
-                    // </div>  
-                    <RedAlert message={msg} marginTop="2"/>
-                :
-                    null
-                }
+                {msg !== "" && msg !== "success" ? (
+                    <>
+                        <RedAlert message={msg} marginTop="2"/>
+                    </>
+                ) : null}
             </div>
         </form>
     )

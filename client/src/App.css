@@ -224,7 +224,7 @@ a {
 .search-form-dropdown {
   position: absolute;
   width: 100%;
-  max-height: 25vh;
+  max-height: 20vh;
   overflow-y: scroll;
   background-color: #b1b6c1;
   /* background-color: #bdc3d0; */
@@ -253,12 +253,14 @@ a {
   /* margin-top: -10%; */
   font-family: "Palatino";
   /* font-family: "Times New Roman"; */
-
 }
 
 .stock-title {
   font-size: 25px;
   line-height: 75%;
+  overflow: hidden;
+  overflow-y: hidden;
+  /* word-wrap: break-word; */
 }
 
 .stock-price {
@@ -384,11 +386,12 @@ a {
 /***************************** PROFILE *****************************/
 .profile-container {
   margin-left: 10%;
-  max-width: 80%; 
+  max-width: 85%; 
   height: 80vh;
   display: flex;
   flex-direction: column;
   position: relative;
+  font-family: "Palatino";
 }
 
 .profile-welcome {
@@ -396,6 +399,9 @@ a {
 }
 
 .profile-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two columns, each taking up equal width */
+  column-gap: 50px;
   margin-top: 3%;
   max-width: 100%;
   max-height: 100%;
@@ -413,10 +419,11 @@ a {
   font-family: "Palatino";
   flex: 2.8;
   overflow-y: scroll;
-  max-width: 100%;
+  margin-top: 5%;
+  max-width: 50%;
   max-height: 100%;
   border: 1px solid rgb(106, 108, 111);
-  background-color: #b1b6c1;
+  background-color: #c3c8d1;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }

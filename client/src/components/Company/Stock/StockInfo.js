@@ -119,7 +119,11 @@ function StockInfo({ data, sharesOwned }) {
     return (
         <div className="stock-container">
             <div className="stock-title">
-                <h1><strong>{name}</strong></h1>
+                {
+                    name.length > 35 ? 
+                    <h2><strong>{name}</strong></h2> :
+                    <h1><strong>{name}</strong></h1>
+                }
                 ({exchange}: {symbol})
                 <div className="stock-price">
                     ${current_price} <b className={arrow_class}>({formattedPercentChange}%)</b>
