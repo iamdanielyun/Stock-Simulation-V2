@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import StockInfo from "./Stock/StockInfo";
 import News from "./News/News";
+import useGetStockInfo from "../../api/Stock/useGetStockInfo";
 
 function Company() {
     const { symbol } = useParams();
     const [stockData, setStockData] = useState(null);
     const [newsData, setNewsData] = useState(null);
     const [sharesOwned, setSharesOwned] = useState(0);
+    // const stockData = useGetStockInfo(symbol);
 
     useEffect(() => {
         if (symbol && symbol !== "") {

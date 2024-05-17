@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
   
 const StyledListItem = styled(ListItem)({
-    maxHeight: '10vh',
+    maxHeight: '13vh',
     marginBottom: "5%"
 });
   
