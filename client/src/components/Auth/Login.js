@@ -1,42 +1,17 @@
-import {useState, useEffect} from 'react';
-import { useNavigate } from "react-router-dom";
+import {useState} from 'react';
+import useLogin from '../../api/Auth/useLogin';
+import RedAlert from "../Alert/RedAlert";
 
 function Login() {
-
-    const navigate = useNavigate();
     const [msg, setMsg] = useState("");
+    const {login} = useLogin();
 
     function handleSubmit(e) {
         e.preventDefault();
         console.log("HEY!")
         const username = document.getElementsByName("login_username")[0].value;
         const password = document.getElementsByName("login_password")[0].value;
-        
-        fetch(`${process.env.REACT_APP_url}/auth/login`, {
-            method: "POST",
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-
-            if(data.status === 201) {
-                navigate("/profile");
-                window.location.reload(true);   
-            }
-            else {
-                setMsg(data.message);
-                navigate("/login");
-            }
-        })
-        .catch(err => console.log(err));
+        login(setMsg, username, password);
     }
 
     return (
@@ -46,12 +21,12 @@ function Login() {
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <input type="text" name="login_username" class="underline" placeholder="Username"/>
                     <input type="password" name="login_password" class="underline" placeholder="Password"/>
-
+ 
                     {/* Display Error msg if any */}
                     {msg != "" ? 
-                    <div className="error-msg">
-                        *{msg}*
-                    </div>
+                        <div className="error-msg">
+                            <RedAlert message={msg} marginTop="5" />
+                        </div>
                     : null
                     }
                     <button class="button-36" type="submit">Login</button>

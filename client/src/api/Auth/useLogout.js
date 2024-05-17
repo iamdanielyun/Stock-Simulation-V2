@@ -1,12 +1,8 @@
-import {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
 
-function Logout() {
+function useLogout() {    
     const navigate = useNavigate();
-    const [result, setResult] = useState(null);
-
-    useEffect(() => {
+    const logout = () => {
         fetch(`${process.env.REACT_APP_url}/auth/logout`, {
             method: "POST",
             credentials: 'include'
@@ -14,8 +10,6 @@ function Logout() {
         .then(response => response.json())
         .then(data => {
             console.log(data); 
-            setResult(data.message);
-
             if(data.message === "success")
             {
                 navigate("/");
@@ -23,13 +17,8 @@ function Logout() {
             }
         })
         .catch(err => console.log(err));
-    }, [])
-
-    return (
-        <div className="home">
-            <h1><center><CircularProgress /></center></h1>
-        </div>
-    )
+    }
+    return { logout };
 }
 
-export default Logout;
+export default useLogout;

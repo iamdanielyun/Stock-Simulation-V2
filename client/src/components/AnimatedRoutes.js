@@ -8,9 +8,7 @@ import Company from "./Company/Company";
 import AllNews from "./Company/News/AllNews";
 import Register from './Auth/Register';
 import Login from './Auth/Login';
-import Logout from './Auth/Logout';
-import useCheckAuth from './Auth/useCheckAuth';
-
+import useCheckAuth from '../api/Auth/useCheckAuth';
 
   function AnimatedRoutes() {
     const location = useLocation();
@@ -31,7 +29,6 @@ import useCheckAuth from './Auth/useCheckAuth';
                 <Route path="/profile" element={!authenticated ? <Navigate to="/login" /> : <Profile />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={authenticated ? <Navigate to="/profile" /> : <Login />} />
-                <Route path="/logout" element={!authenticated ? <Navigate to="/login" /> : <Logout />} />
                 <Route path="/company/:symbol" element={<Company />} />
                 <Route path="/company/:symbol/news" element={<AllNews />} />
                 <Route path='*' element={<Navigate to="/" replace />}/>

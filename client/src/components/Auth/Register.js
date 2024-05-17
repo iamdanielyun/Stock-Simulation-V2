@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
-import { useNavigate } from "react-router-dom";
+import {useState} from 'react';
+import useRegister from '../../api/Auth/useRegister';
+import RedAlert from '../Alert/RedAlert';
 
 function Register() {
-
-    const navigate = useNavigate();
     const [msg, setMsg] = useState("");
+    const {register} = useRegister();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -12,33 +12,7 @@ function Register() {
         const username = document.getElementsByName("register_username")[0].value;
         const password = document.getElementsByName("register_password")[0].value;
         const confirmation = document.getElementsByName("register_confirmation")[0].value;
-
-        fetch(`${process.env.REACT_APP_url}/auth/register`, {
-            method: "POST",
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                confirmation: confirmation
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-
-            if(data.status === 201) {
-                navigate("/profile");
-                window.location.reload(true);   
-            }
-            else {
-                setMsg(data.message);
-                navigate("/register");
-            }
-        })
-        .catch(err => console.log(err));
+        register(setMsg, username, password, confirmation);
     }
 
     return (
@@ -53,7 +27,7 @@ function Register() {
                     {/* Display Error msg if any */}
                     {msg != "" ? 
                     <div className="error-msg">
-                        *{msg}*
+                        <RedAlert message={msg} marginTop="5" />
                     </div>
                     : null
                     }

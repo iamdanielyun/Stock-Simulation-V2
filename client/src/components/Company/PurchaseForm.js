@@ -4,9 +4,9 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-import useCheckAuth from "../Auth/useCheckAuth";
 import RedAlert from '../Alert/RedAlert';
 import useBuySell from '../../api/Profile/useBuySell';
+import useCheckAuth from "../../api/Auth/useCheckAuth";
 
 function PurchaseForm(props) {
     const navigate = useNavigate();

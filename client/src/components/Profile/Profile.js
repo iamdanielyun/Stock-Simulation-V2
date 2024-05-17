@@ -4,9 +4,9 @@ import List from '@mui/material/List';
 import CircularProgress from '@mui/material/CircularProgress';
 import Divider from '@mui/material/Divider';
 import StockItem from './StockItem';
-import useCheckAuth from '../Auth/useCheckAuth';
 import DepositForm from './DepositForm';
 import InvestmentsGraph from './InvestmentsGraph';
+import useCheckAuth from "../../api/Auth/useCheckAuth";
 
 function Profile() {
 
