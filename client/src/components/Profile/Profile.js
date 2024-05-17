@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import * as React from 'react';
 import List from '@mui/material/List';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -7,31 +6,13 @@ import StockItem from './StockItem';
 import DepositForm from './DepositForm';
 import InvestmentsGraph from './InvestmentsGraph';
 import useCheckAuth from "../../api/Auth/useCheckAuth";
+import useGetProfile from '../../api/Profile/useGetProfile';
 
 function Profile() {
-
-    const [stocks, setStocks] = useState(null);
-    const [cash, setCash] = useState("...");
-    const [newTotal, setNewTotal] = useState(0);
-    const [percentChange, setPercentChange] = useState(0);
+    const {stocks, cash, newTotal, percentChange} = useGetProfile();
     const {authenticated, username} = useCheckAuth();
-    
-    //Get profile data
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_url}/auth/profile`, {
-            method: 'GET',
-            credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(data => {
-            setStocks(data.stock_symbols);
-            setCash(data.cash);
-            setNewTotal(data.newTotal);
-            setPercentChange(data.percentChange);
-        })
-        .catch(err => console.log(err));
-    }, [])
 
+    /*
     const stockss = [
         {
             "symbol": "AAPL",
@@ -146,6 +127,8 @@ function Profile() {
             "logo": "https://api.twelvedata.com/logo/amd.com"
         },
     ];
+
+    */
 
     if(authenticated)
     {

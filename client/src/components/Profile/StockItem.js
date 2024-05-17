@@ -19,30 +19,30 @@ function StockItem(props) {
 
     return (
         <Link to={`/company/${symbol}`}>
-        <ListItem>
-            <ListItemButton>
-                <ListItemAvatar>
-                    <Avatar
-                    alt={`Oops!`}
-                    src={logo}
+            <ListItem>
+                <ListItemButton>
+                    <ListItemAvatar>
+                        <Avatar
+                        alt={`Oops!`}
+                        src={logo}
+                        />
+                    </ListItemAvatar>
+                    <ListItemText 
+                        primary={
+                            <div style={{marginTop: "5%", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                                <div>
+                                    <span style={{ fontSize: '1.1rem', fontFamily: 'Palatino' }}>{symbol}</span>
+                                    <span style={{ fontSize: '0.7rem', fontFamily: 'Palatino' }}> x{shares}</span>
+                                </div>
+                                <div style={{display: "flex", flexDirection: "column",}}>
+                                    <span style={{ fontSize: '0.9rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b>${currentPrice}</b></span>
+                                    <span className={arrow_class} style={{ fontSize: '0.8rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b> {percentChange}%</b></span>
+                                </div>
+                            </div>
+                        } 
                     />
-                </ListItemAvatar>
-                <ListItemText 
-                    primary={
-                        <div style={{marginTop: "5%", display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                            <div>
-                                <span style={{ fontSize: '1.1rem', fontFamily: 'Palatino' }}>{symbol}</span>
-                                <span style={{ fontSize: '0.7rem', fontFamily: 'Palatino' }}> x{shares}</span>
-                            </div>
-                            <div style={{display: "flex", flexDirection: "column",}}>
-                                <span style={{ fontSize: '0.9rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b>${currentPrice}</b></span>
-                                <span className={arrow_class} style={{ fontSize: '0.8rem', fontFamily: 'Palatino', textAlign: 'right', width: '100%' }}><b> {percentChange}%</b></span>
-                            </div>
-                        </div>
-                    } 
-                />
-            </ListItemButton>
-        </ListItem>
+                </ListItemButton>
+            </ListItem>
         </Link>
 
     )

@@ -8,7 +8,6 @@ function Register() {
 
     function handleSubmit(e) {
         e.preventDefault();
-
         const username = document.getElementsByName("register_username")[0].value;
         const password = document.getElementsByName("register_password")[0].value;
         const confirmation = document.getElementsByName("register_confirmation")[0].value;

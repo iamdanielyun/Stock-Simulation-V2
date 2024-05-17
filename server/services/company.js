@@ -9,21 +9,35 @@ const {
 
 //******************************************************************getSYMBOLS()***************************************************** */
 const getSymbolsService = async (query, limit) => {
-    
-    //Find all symbols starting with query or contains query
-    const regexPattern = new RegExp("^" + query);
-    const results = await Stock.find({
-        symbol: {"$regex": regexPattern}
-    })
-    .limit(limit);
+    const results = [];
+
+    // Find exact symbol
+    const exactSymbol = await Stock.findOne({
+        symbol: query.toUpperCase()
+    });
+
+    // Add exact match if found
+    if (exactSymbol) {
+        results.push(exactSymbol);
+    }
+
+    // Find all symbols starting with query (case insensitive)
+    const regexPattern = new RegExp("^" + query, "i");
+    const similarSymbols = await Stock.find({
+        symbol: { "$regex": regexPattern }
+    }).limit(limit);
+
+    // Combine results, ensuring no duplicates
+    const combinedResults = [...results, ...similarSymbols.filter(symbol => symbol.symbol !== query.toUpperCase())];
 
     // Sort the results by word length in increasing order
-    results.sort((a, b) => a.symbol.length - b.symbol.length);
-    
+    combinedResults.sort((a, b) => a.symbol.length - b.symbol.length);
+
     return {
-        "result": results
+        "result": combinedResults
     };
-}
+};
+
 
 //******************************************************************getPRICE()***************************************************** */
 const getPriceService = async (symbol) => {

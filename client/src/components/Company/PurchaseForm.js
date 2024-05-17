@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -9,7 +9,6 @@ import useBuySell from '../../api/Profile/useBuySell';
 import useCheckAuth from "../../api/Auth/useCheckAuth";
 
 function PurchaseForm(props) {
-    const navigate = useNavigate();
     const [msg, setMsg] = useState("");
     const [action, setAction] = useState("Buy");
     const [shares, setShares] = useState(1);

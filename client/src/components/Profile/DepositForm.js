@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import TextField from '@mui/material/TextField';
@@ -7,14 +6,16 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import RedAlert from '../Alert/RedAlert';
+import useDepositWithdraw from '../../api/Profile/useDepositWithdraw';
 
 function DepositForm(props) {
     const [action, setAction] = useState('Deposit');
     const [amount, setAmount] = useState(100);
     const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
+    const { depositWithdraw } = useDepositWithdraw();
     const cash = props.cash;
 
+    //Submit deposit/withdraw form
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -22,30 +23,7 @@ function DepositForm(props) {
         if(amount == ""|| amount == null || amount <= 0)
             setMsg("Please enter a valid amount");
         else
-        {
-            fetch(`${process.env.REACT_APP_url}/auth/d_w`, {
-                method: "POST",
-                body: JSON.stringify({
-                    option: action,
-                    amount: amount,
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            })
-            .then(response => response.json())
-            .then(data => {
-                setMsg(data.message);
-    
-                if(data.message === "success")
-                {
-                    navigate("/profile");
-                    window.location.reload(true);      
-                }
-            })
-            .catch(err => console.log(err));
-        }
+            depositWithdraw(setMsg, action, amount);
     }
 
     return (
