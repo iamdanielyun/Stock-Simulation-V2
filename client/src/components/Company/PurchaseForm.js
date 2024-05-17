@@ -6,6 +6,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import useCheckAuth from "../Auth/useCheckAuth";
 import RedAlert from '../Alert/RedAlert';
+import useBuySell from '../../api/Profile/useBuySell';
 
 function PurchaseForm(props) {
     const navigate = useNavigate();
@@ -13,7 +14,8 @@ function PurchaseForm(props) {
     const [action, setAction] = useState("Buy");
     const [shares, setShares] = useState(1);
     const {authenticated} = useCheckAuth();
-    const sharesOwned = props.sharesOwned;
+    const {sharesOwned} = props;
+    const {buySellStock} = useBuySell();
 
     //Purchase function
     function purchase(e) {
@@ -27,34 +29,7 @@ function PurchaseForm(props) {
         else if(action.toLowerCase() == "sell" && shares > sharesOwned)     //trying to sell more than what they own
             setMsg("That's more than what you own!");
         else
-        {
-            fetch(`${process.env.REACT_APP_url}/auth/action`, {
-                method: "POST",
-                body: JSON.stringify({
-                    action: action,
-                    symbol: symbol,
-                    shares: shares,
-                    sharesOwned: sharesOwned,   //for selling
-                    price: price,
-                    name: name
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
-            })
-            .then(response => response.json())
-            .then(data => {
-                setMsg(data.message);
-    
-                if(data.message === "success")
-                {
-                    navigate("/profile");
-                    window.location.reload(true);      
-                }
-            })
-            .catch(err => console.log(err));
-        }
+            buySellStock(setMsg, action, symbol, shares, sharesOwned, price, name);
     }
   
     const menuItemStyle = {
