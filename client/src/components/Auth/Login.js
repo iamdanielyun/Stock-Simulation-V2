@@ -30,7 +30,7 @@ function Login() {
                     : null
                     }
                     <button class="button-36" type="submit">Login</button>
-                    <h6>Don't have an account? <a href="/register"><u>Register</u></a></h6>
+                    <h6 className='login-no-account'>Don't have an account? <a href="/register">Register</a></h6>
                 </form>
             </center>
             

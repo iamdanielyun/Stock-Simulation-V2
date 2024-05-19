@@ -5,6 +5,8 @@ function useGetProfile() {
     const [cash, setCash] = useState("...");
     const [newTotal, setNewTotal] = useState(0);
     const [percentChange, setPercentChange] = useState(0);
+    const [labels, setLabels] = useState([]);
+    const [values, setValues] = useState([]);
 
     //Get profile data
     useEffect(() => {
@@ -18,6 +20,8 @@ function useGetProfile() {
             setCash(data.cash);
             setNewTotal(data.newTotal);
             setPercentChange(data.percentChange);
+            setLabels(data.labels);
+            setValues(data.values);
         })
         .catch(err => console.log(err));
     }, [])
@@ -26,7 +30,9 @@ function useGetProfile() {
         stocks,
         cash,
         newTotal,
-        percentChange
+        percentChange,
+        labels,
+        values
     };
 }
 

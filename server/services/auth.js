@@ -42,7 +42,8 @@ const registerService = async (req, username, password, confirmation) => {
             username: username,
             password: hashedPassword, 
             'investments.cash': 1000,           //start with $1000
-            'history.time_created': new Date()  //add time created
+            'history.time_created': new Date(),  //add time created
+            'history.entries': [{ time: new Date(), total_value: 1000 }]
         });
         await new_user.save();
 

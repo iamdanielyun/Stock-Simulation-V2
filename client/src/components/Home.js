@@ -1,42 +1,14 @@
 import {useState, useEffect} from 'react';
 import {motion} from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import Cat from "../icons/Cat3.jpeg";
+
+const link1 = "https://www.bankrate.com/investing/stock-market-basics-for-beginners/";
+const link2 = "https://www.investopedia.com/articles/basics/06/invest1000.asp";
 
 function Home(props) {
-
-    const [data, setData] = useState(null);
-    const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const input = document.getElementsByName("homePageSymbol")[0].value.toUpperCase();
-        const trimmed = input.trim();
-        if(trimmed == "")
-        {
-            setMsg("Provide a valid symbol");
-            return;
-        }
-
-        //Check if this symbol is valid
-        fetch(`${process.env.REACT_APP_url}/api/current_price/${input}`, {
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data != null) {
-                setData(data.data);
-                navigate(`company/${input}`);
-                window.location.reload(true); 
-            } else {
-                setMsg("Provide a valid symbol");
-            }
-        })
-        .catch(err => console.log(err));
-    }
+    
     return (
-        <div className="home">
+        <>
             <motion.div
                 initial={{ opacity: 0, scale: 0.7 }}
                 animate={{ opacity: 1, scale: 1 }} 
@@ -49,30 +21,33 @@ function Home(props) {
                     transformOrigin: 'center center',
                 }}
             >
-                <div className="login">
-                    <center>
-                        <h2>Enter ticker symbol...</h2>
-                        <br></br>
-                        <form onSubmit={(e) => handleSubmit(e)}>
-                            <div className="input-container">
-                                <input type="text" name="homePageSymbol" class="underline" placeholder="e.g. AAPL" autoComplete="off"/>
-
-                                {/* Error msg */}
-                                {msg != "" ? 
-                                    <div className="error-msg">
-                                        <br />
-                                        *{msg}*
-                                    </div>
-                                : 
-                                    null
-                                }
-                                <button class="button-37" type="submit">Get Quote</button>
-                            </div>
-                        </form>
-                    </center>
+            
+            <div className='home'>
+                <div className='home-description'>
+                    <div className='home-description-greeting'>
+                        <h1><b>Welcome!</b></h1>
+                    </div>
+                    <div className='home-description-message'>
+                        <p>
+                            Dive into the world of trading where you can test your strategies
+                            and take unlimited risks. <a href="/login">Get started</a> now on your journey to becoming a market maestro!
+                        </p>
+                        <p>
+                            Here are some helpful links:
+                        </p>
+                        <p className='home-description-message-helpful-links'>
+                            <a target="blank" href={link1}>Stock market basics: 9 tips for beginners</a>
+                            <a target="blank" href={link2}>How to Invest in Stocks: A Beginner’s Guide</a>
+                        </p>
+                    </div>
                 </div>
+                <div className='home-image'>
+                    <img src={Cat} />
+                </div>
+            </div>
+            
             </motion.div>
-        </div>
+        </>
     )
 }
 

@@ -93,7 +93,9 @@ function PurchaseForm(props) {
                         <Button type="submit" variant="outlined" disabled sx={buttonStyle}>
                             {action == null ? <strong>...</strong> : action}
                         </Button>
-                        <i>Please <Link to={{pathname: "/login"}}>login</Link></i>
+                        <p>
+                            Please <Link to={{pathname: "/login"}}>login</Link>
+                        </p>
                     </div>
                 }
 

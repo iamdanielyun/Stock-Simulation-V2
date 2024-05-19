@@ -9,7 +9,7 @@ import useCheckAuth from "../../api/Auth/useCheckAuth";
 import useGetProfile from '../../api/Profile/useGetProfile';
 
 function Profile() {
-    const {stocks, cash, newTotal, percentChange} = useGetProfile();
+    const {stocks, cash, newTotal, percentChange, labels, values} = useGetProfile();
     const {authenticated, username} = useCheckAuth();
 
     /*
@@ -145,7 +145,7 @@ function Profile() {
                             <span style={{ fontSize: '3rem', fontFamily: 'Palatino' }}><b>${newTotal}</b></span>
                             <span className={arrow_class} style={{ fontSize: '2.1rem', fontFamily: 'Palatino' }}><b>{percentChange}%</b></span>
                         </div>
-                        <InvestmentsGraph />
+                        <InvestmentsGraph labels={labels} values={values}/>
                     </div>
 
                     {/* Investments + cash */}

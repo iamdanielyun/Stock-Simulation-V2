@@ -32,7 +32,7 @@ function Register() {
                     }
 
                     <button class="button-36" type="submit">Register</button>
-                    <h6>Already have an account? <a href="/login"><u>Login</u></a></h6>
+                    <h6 className='login-no-account'>Already have an account? <a href="/login">Login</a></h6>
                 </form>
             </center>
             
