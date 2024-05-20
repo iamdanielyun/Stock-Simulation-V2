@@ -224,7 +224,7 @@ a {
 
 .home-image img {
   width: 100%; 
-  height: 100%;
+  height: auto;
   border-radius: 2%;
 }
 
@@ -290,6 +290,10 @@ a {
   width: 60%;  
   max-width: 60%;  
   padding: 20px;  
+}
+
+.company-container-loading {
+  height: 80vh;
 }
 
 /***************************** STOCK *****************************/

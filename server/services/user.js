@@ -8,10 +8,10 @@ const {
 //******************************************************************Investment History***************************************************** */
 const userHistoryService = (user) => {
     try {
-        const options = { month: 'long', day: 'numeric', hour: 'numeric' };
+        const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         const entries = user.history.entries;
         const length = entries.length - 1;
-        const step = Math.ceil(length / 12);
+        const step = Math.ceil(length / length);
         var labels = [];
         var values = [];
 
@@ -83,6 +83,14 @@ const portfolioValueService = async (user) => {
             });
         }
 
+        //Place an entry into user's history
+        await User.findByIdAndUpdate(
+            user._id,
+            { $push: { 'history.entries': { time: new Date(), total_value: newTotal } } },
+            { new: true }
+        );
+        console.log("Updated user " + user.username + " with total value of " + newTotal + " and " + stock_list.length + " unique stocks");
+        
         stock_list = stockInfoList;
         console.log(stock_list);
 
@@ -266,10 +274,6 @@ const buySellService = async (req) => {
                     }}
                 );
             }
-
-            return {
-                "message": "success"
-            };
         }
                         
         //if action is sell
@@ -360,12 +364,11 @@ const buySellService = async (req) => {
                         }
                     }
                 )
-            }
-
-            return {
-                "message": "success"
-            };
-        }
+            }  
+        }        
+        return {
+            "message": "success"
+        };
     }
     catch(err) {
         console.log(err);

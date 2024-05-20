@@ -1,4 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress';
+import { LineChart } from '@mui/x-charts/LineChart';
 import { Line } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -22,7 +23,9 @@ ChartJS.register(
     Legend
 )
 
-function InvestmentsGraph({ labels, values }) {
+function InvestmentsGraph({ labels, values, color }) {
+    // Calculate the min and max values for the y-axis
+    const maxValue = Math.max(...values) + 3000;
 
     const options = {
         responsive: true,
@@ -35,6 +38,16 @@ function InvestmentsGraph({ labels, values }) {
             text: "Investing...",
           },
         },
+        scales: {
+          x: {
+              display: false, // Set to false to hide the x-axis
+          },
+          y: {
+              display: true, // Set to false to hide the y-axis
+              min: 0,
+              max: maxValue,
+          },
+      },
         maintainAspectRatio: true
     }
 
@@ -46,12 +59,14 @@ function InvestmentsGraph({ labels, values }) {
           {
             label: "Portfolio value",
             data: values,
-            borderColor: "rgba(0,204,0)",
-            backgroundColor: "rgba(0,204,0)",
+            borderColor: color,
+            backgroundColor: color,
+            pointRadius: 3,  
+            pointHoverRadius: 10
           },
         ],
     }
-    
+
     return (
         <Line options={options} data={data} /> 
     )

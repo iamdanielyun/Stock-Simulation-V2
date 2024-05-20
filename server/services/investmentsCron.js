@@ -41,7 +41,7 @@ const getPortfolioValue = async () => {
                 { $push: { 'history.entries': { time: time, total_value: totalValue } } },
                 { new: true }
             );
-            console.log("Updated user " + user.username + " with total value of " + totalValue + " and " + stocks.length + " unique stocks");
+            console.log("CRON: Updated user " + user.username + " with total value of " + totalValue + " and " + stocks.length + " unique stocks");
         }
     }
     catch (err) {

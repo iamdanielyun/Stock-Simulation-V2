@@ -37,7 +37,7 @@ const getSymbolsService = async (query, limit) => {
         "result": combinedResults
     };
 };
-
+ 
 
 //******************************************************************getPRICE()***************************************************** */
 const getPriceService = async (symbol) => {

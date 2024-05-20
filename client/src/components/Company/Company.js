@@ -16,9 +16,12 @@ function Company() {
         <div className="company-container">
             {stockData == null || stockData.name == null
             ?
-                <center>
-                    <CircularProgress />
-                </center>
+                <div className='company-container-loading'>
+                    <center>
+                        <CircularProgress />
+                    </center>
+                </div>
+                
             :
                 <>
                     <StockInfo sharesOwned={sharesOwned} data={stockData}/>

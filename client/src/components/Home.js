@@ -1,12 +1,15 @@
 import {useState, useEffect} from 'react';
 import {motion} from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
 import Cat from "../icons/Cat3.jpeg";
 
 const link1 = "https://www.bankrate.com/investing/stock-market-basics-for-beginners/";
 const link2 = "https://www.investopedia.com/articles/basics/06/invest1000.asp";
 
-function Home(props) {
+function Home() {
     
+    const [loading, setLoading] = useState(true);
+
     return (
         <>
             <motion.div
@@ -42,7 +45,12 @@ function Home(props) {
                     </div>
                 </div>
                 <div className='home-image'>
-                    <img src={Cat} />
+                    {loading ? <CircularProgress /> : null
+                    }
+                    <img 
+                        onLoad={() => setLoading(false)}
+                        src={Cat} 
+                    />
                 </div>
             </div>
             

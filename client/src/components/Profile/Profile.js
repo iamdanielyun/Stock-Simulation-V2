@@ -134,7 +134,7 @@ function Profile() {
     {
         //Green if up, red if down
         const arrow_class = percentChange >= 0 ? "positive_arrow" : "negative_arrow";
-
+        const color = percentChange < 0 ? "rgb(255, 99, 132)" : "rgba(0,204,0)";
         return (
             <div className="profile-container">
                 <div className="profile-content">
@@ -145,7 +145,7 @@ function Profile() {
                             <span style={{ fontSize: '3rem', fontFamily: 'Palatino' }}><b>${newTotal}</b></span>
                             <span className={arrow_class} style={{ fontSize: '2.1rem', fontFamily: 'Palatino' }}><b>{percentChange}%</b></span>
                         </div>
-                        <InvestmentsGraph labels={labels} values={values}/>
+                        <InvestmentsGraph labels={labels} values={values} color={color}/>
                     </div>
 
                     {/* Investments + cash */}
