@@ -14,8 +14,7 @@ const { portfolioValueJob } = require("./services/investmentsCron");
 
 //Cors
 const corsOptions = {
-    origin: 'http://localhost:3000',
-    //origin: 'https://stocksimulation.onrender.com',
+    origin: process.env.client, 
     credentials: true, // Enable credentials (e.g., cookies, authorization headers)
 };
 
