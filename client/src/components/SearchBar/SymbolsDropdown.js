@@ -18,7 +18,17 @@ const StyledDivider = styled(Divider)({
 });
 
 function SymbolsDropdown(props) {
-    const sample = ["A", "AA", "AAL", "AAP", "AAPL", "AMZN"];
+    // const sample = ["A", "AA", "AAL", "AAP", "AAPL", "AMZN"];
+    const sample = [
+        {
+            "symbol": "AAPL",
+            "companyName": "Aaple Inc."
+        },
+        {
+            "symbol": "TSLA",
+            "companyName": "Tesla Inc."
+        }
+    ]
     const query = props.data;
     const data = useGetSymbols(query);
 

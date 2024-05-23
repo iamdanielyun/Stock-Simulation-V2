@@ -1,17 +1,19 @@
 import {useState} from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import useLogin from '../../api/Auth/useLogin';
 import RedAlert from "../Alert/RedAlert";
 
 function Login() {
     const [msg, setMsg] = useState("");
+    const [loading, setLoading] = useState(false);
     const {login} = useLogin();
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("HEY!")
+        setLoading(true);
         const username = document.getElementsByName("login_username")[0].value;
         const password = document.getElementsByName("login_password")[0].value;
-        login(setMsg, username, password);
+        login(setMsg, setLoading, username, password);
     }
 
     return (
@@ -29,7 +31,7 @@ function Login() {
                         </div>
                     : null
                     }
-                    <button class="button-36" type="submit">Login</button>
+                    {loading ? <CircularProgress /> : <button class="button-36" type="submit">Login</button>}
                     <h6 className='login-no-account'>Don't have an account? <a href="/register">Register</a></h6>
                 </form>
             </center>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 function useLogin() {    
     const navigate = useNavigate();
-    const login = (setMsg, username, password) => {
+    const login = (setMsg, setLoading, username, password) => {
         fetch(`${process.env.REACT_APP_url}/auth/login`, {
             method: "POST",
             body: JSON.stringify({
@@ -16,6 +16,7 @@ function useLogin() {
         })
         .then(response => response.json())
         .then(data => {
+            setLoading(false);
             if(data.status === 201) {
                 navigate("/profile");
                 window.location.reload(true);   
