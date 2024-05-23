@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 function useRegister() {    
     const navigate = useNavigate();
-    const register = (setMsg, username, password, confirmation) => {
+    const register = (setMsg, setLoading, username, password, confirmation) => {
         fetch(`${process.env.REACT_APP_url}/auth/register`, {
             method: "POST",
             body: JSON.stringify({
@@ -17,6 +17,7 @@ function useRegister() {
         })
         .then(response => response.json())
         .then(data => {
+            setLoading(false);
             if(data.status === 201) {
                 navigate("/profile");
                 window.location.reload(true);   
