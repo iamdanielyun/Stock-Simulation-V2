@@ -41,9 +41,9 @@ const registerService = async (req, username, password, confirmation) => {
         const new_user = new User({
             username: username,
             password: hashedPassword, 
-            'investments.cash': 1000,           //start with $1000
+            'investments.cash': 50000,           //start with $50000
             'history.time_created': new Date(),  //add time created
-            'history.entries': [{ time: new Date(), total_value: 1000 }]
+            'history.entries': [{ time: new Date(), total_value: 50000 }]
         });
         await new_user.save();
 
@@ -142,8 +142,42 @@ const logoutService = (req, res) => {
     });
 };
 
+//******************************************************************GUEST LOGIN***************************************************** */
+const guestLoginService = async (req) => {
+
+    try {
+        const randomNumber = Math.floor(1000000000000000 + Math.random() * 9000000000000000).toString();
+        const guestUsername = `guest${randomNumber}`;
+        const guest = new User({
+            username: guestUsername,
+            password: "This doesn't matter", 
+            'investments.cash': 50000,           //start with $50000
+            'history.time_created': new Date(),  //add time created
+            'history.entries': [{ time: new Date(), total_value: 50000 }]
+        });
+        await guest.save();
+    
+        //Set session
+        req.session.userid = guestUsername;
+        await req.session.save();
+
+        return {
+            "status": 201,
+            "message": "Session created"
+        };
+    }
+    catch(err) {
+        console.error("Error guest login:", err);
+        return {
+            "status": 500,
+            "message": "Internal Server Error"
+        };
+    }
+};
+
 module.exports = {
     registerService,
     loginService,
-    logoutService
+    logoutService,
+    guestLoginService,
 }

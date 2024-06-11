@@ -1,7 +1,8 @@
 const {
     registerService,
     loginService,
-    logoutService
+    logoutService,
+    guestLoginService
 } = require("../services/auth");
 
 //Check authentication middleware
@@ -52,10 +53,17 @@ const logout = (req, res) => {
     logoutService(req, res);
 }
 
+//******************************************************************GUEST LOGIN***************************************************** */
+const login_guest = async (req, res) => {
+    const result = await guestLoginService(req);
+    return res.send(result);
+}
+
 module.exports = {
     authenticated,
     return_auth,
     register,
     login,
-    logout
+    logout,
+    login_guest,
 }

@@ -1,19 +1,29 @@
 import {useState} from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import useLogin from '../../api/Auth/useLogin';
+import useGuestLogin from '../../api/Auth/useGuestLogin';
 import RedAlert from "../Alert/RedAlert";
 
 function Login() {
     const [msg, setMsg] = useState("");
     const [loading, setLoading] = useState(false);
     const {login} = useLogin();
+    const {guestLogin} = useGuestLogin();
 
+    //handle regular login
     function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
         const username = document.getElementsByName("login_username")[0].value;
         const password = document.getElementsByName("login_password")[0].value;
         login(setMsg, setLoading, username, password);
+    }
+
+    //handle guest login
+    function handleGuestSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+        guestLogin(setMsg, setLoading);
     }
 
     return (
@@ -33,6 +43,9 @@ function Login() {
                     }
                     {loading ? <CircularProgress /> : <button class="button-36" type="submit">Login</button>}
                     <h6 className='login-no-account'>Don't have an account? <a href="/register">Register</a></h6>
+
+                    <h6 style={{marginBottom: "2%"}}>OR</h6>
+                    <button class="button-36" onClick={handleGuestSubmit}>Continue as guest</button>
                 </form>
             </center>
             

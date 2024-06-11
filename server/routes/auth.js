@@ -5,11 +5,15 @@ const {
   return_auth,
   register,
   login,
-  logout
+  logout,
+  login_guest,
 } = require("../controllers/auth");
 
 router.get("/return_auth", return_auth);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", authenticated, logout);
+
+//guest mode
+router.post("/login_guest", login_guest);
 module.exports = router;

@@ -10,7 +10,8 @@ function useGetProfile() {
 
     //Get profile data
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_url}/auth/profile`, {
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        fetch(`${process.env.REACT_APP_url}/auth/profile?timeZone=${encodeURIComponent(userTimeZone)}`, {
             method: 'GET',
             credentials: 'include',
         })
